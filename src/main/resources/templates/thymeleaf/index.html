@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
+</head>
+<body>
+	<div style="border: 1px solid #ccc; padding: 5px; margin-bottom: 20px;">
+		<a href="/">Home</a> | <a href="/new">Add Joke</a> |
+	</div>
+	<div class="container">
+		<div class="card">
+			<div class="card-block">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Kategorija</td>
+							<td>Vic</td>
+							<td>Likes</td>
+							<td>Dislikes</td>
+							<td>Razlika</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="joke : ${data?.content}">
+							<td th:text="${joke?.id}"></td>
+							<td th:text="${joke?.category}"></td>
+							<td th:text="${joke?.content}"></td>
+							<td th:text="${joke?.likes}"></td>
+							<td th:text="${joke?.dislikes}"></td>
+							<td th:text="${joke?.difference}"></td>
+							<td><a th:href="@{/joke/likes/__${joke.id}__}" class="btn btn-primary eBtn">Like</a>
+								<a th:href="@{/joke/dislikes/__${joke.id}__}" class="btn btn-danger eBtn">Dislike</a>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<hr />
+ 				<ul class="nav nav-pills"> 
+					<li class="nav-item" 
+ 						th:each="i : ${#numbers.sequence(0,data?.totalPages-1)}"><a 
+ 						th:href="@{/(page=${i})}" th:text="${i}" class="nav-link" 
+ 						th:classappend="${currentPage}==${i}?'active':''"></a> 
+ 					</li> 
+ 				</ul> 
+			</div>
+		</div>
+	</div>
+</body>
+</html>
