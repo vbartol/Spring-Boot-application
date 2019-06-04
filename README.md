@@ -1,1 +1,1 @@
-# Spring Boot application
+This Spring Boot application is task for job application.
